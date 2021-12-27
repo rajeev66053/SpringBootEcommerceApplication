@@ -1,0 +1,19 @@
+.welcome {
+    color: red;
+    text-align: center;
+}
+
+.error {
+    color: red;
+    font-style: italic;
+}
+
+.product-image {
+    width: 120px;
+    height: 80px;
+}
+
+.product-image-view {
+    width: 480px;
+    height: 320px;
+}

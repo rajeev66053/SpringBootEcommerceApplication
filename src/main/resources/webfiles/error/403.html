@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>403</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+
+<body>
+<th:block sec:authorize="!hasAuthority('ADMIN')">
+    <div th:replace="header.html::header"></div>
+    <div th:replace="menu.html::menu"></div>
+</th:block>
+
+<th:block sec:authorize="hasAuthority('ADMIN')">
+    <div th:replace="admin_header.html::header"></div>
+    <div th:replace="admin_menu.html::menu"></div>
+</th:block>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>Forbidden Error!</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-title">Forbidden Error!</div>
+
+<div th:replace="footer.html::footer"></div>
+
+</body>
+</html>

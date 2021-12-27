@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/product.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div th:replace="admin_header.html::header"></div>
+<div th:replace="admin_menu.html::menu"></div>
+
+<h1>Create a Product</h1>
+
+
+<form th:action="@{/admin/products/add}" th:object="${product}" method="POST" enctype="multipart/form-data" novalidate>
+
+    <div class="form-group row">
+        <label for="productcode" class="col-sm-2 col-form-label">Product Code</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:classappend="${#fields.hasErrors('productCode')}?is-invalid"
+                   th:field="*{productCode}" id="productcode" placeholder="Product Code">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('productCode')}" th:errors="*{productCode}"></div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" th:classappend="${#fields.hasErrors('name')}?is-invalid"
+                   th:field="*{name}" id="name" placeholder="Product Name">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="image" class="col-sm-2 col-form-label">Image</label>
+        <div class="col-sm-10">
+            <input type="file" id="image" name="file" class="custom-file-input form-control-file"
+                   accept="image/png, image/jpeg">
+            <label class="custom-file-label" for="image">Choose file...</label>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="price" class="col-sm-2 col-form-label">Price</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" th:classappend="${#fields.hasErrors('price')}?is-invalid"
+                   th:field="*{price}" id="price" placeholder="Product Price">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="description"
+                      th:classappend="${#fields.hasErrors('description')}?is-invalid" th:field="*{description}"
+                      rows="3"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Create Product</button>
+        </div>
+    </div>
+
+</form>
+
+<input type="button" value="Back" class="btn btn-success" onclick="history.back(-1)"/>
+
+
+<div th:replace="admin_footer.html::footer"></div>
+
+</body>
+</html>

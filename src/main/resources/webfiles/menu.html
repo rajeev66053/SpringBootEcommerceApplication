@@ -1,0 +1,13 @@
+<div th:fragment="menu" class="menu-container"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <a th:href="@{/}">Home</a> |
+    <a th:href="@{/productlist}">Product List</a> |
+    <th:block sec:authorize="isAuthenticated()">
+        <a th:href="@{/cart/mycart}"> My Cart </a>|
+        <a th:href="@{/orders}"> My Order</a>|
+        <a th:href="@{/profile}">Profile</a> |
+    </th:block>
+
+
+</div>

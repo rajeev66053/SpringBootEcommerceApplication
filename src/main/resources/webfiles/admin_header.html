@@ -1,0 +1,15 @@
+<div th:fragment="header" class="header-container" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <div class="header-bar">
+        <th:block sec:authorize="isAuthenticated()">
+            Hello
+            <a th:href="@{/}" sec:authentication="name">Username</a>
+            &nbsp;|&nbsp;
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Logout"/>
+            </form>
+        </th:block>
+    </div>
+
+</div>

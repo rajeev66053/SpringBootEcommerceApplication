@@ -1,0 +1,8 @@
+<div th:fragment="menu" class="menu-container"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <a th:href="@{/admin}">Home</a> |
+    <a th:href="@{/admin/products}">Product List</a> |
+    <a th:href="@{/admin/users}"> UserList </a> |
+    <a th:href="@{/admin/orders}"> Order List </a>
+</div>

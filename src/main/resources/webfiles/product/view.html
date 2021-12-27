@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/product.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div th:replace="admin_header.html::header"></div>
+<div th:replace="admin_menu.html::menu"></div>
+
+<div class="container" th:object="${product}">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="project-info-box mt-0">
+                <h1>Product Details</h1>
+                <p class="mb-0"></p>
+            </div><!-- / project-info-box -->
+
+            <div class="project-info-box">
+                <b>Product Code:</b>
+                <p th:text="${product.getProductCode()}"></p>
+                <b>Product Name:</b>
+                <p th:text="${product.getName()}"></p>
+                <b>Price:</b>
+                <p class="mb-0" th:text="${product.getPrice()}"></p>
+                <b>Description:</b>
+                <p th:text="${product.getDescription()}"></p>
+            </div><!-- / project-info-box -->
+        </div><!-- / column -->
+
+        <div class="col-md-7">
+            <img th:if="${product.getImage()}" th:src="@{${product.getImagePath()}}" alt="product-image"
+                 class="product-image-view"/>
+        </div><!-- / column -->
+    </div>
+</div>
+<input type="button" value="Back" class="btn btn-success" onclick="history.back(-1)"/>
+
+
+<div th:replace="admin_footer.html::footer"></div>
+</body>
+</html>

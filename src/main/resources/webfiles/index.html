@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Ecommerce Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div th:replace="header.html::header"></div>
+<div th:replace="menu.html::menu"></div>
+
+<h2 class="welcome" th:text="${message}"></h2>
+
+<!-- <div align="center">
+     <div sec:authorize="isAuthenticated()">
+         Welcome <b><span sec:authentication="name">Username</span></b> &nbsp
+&lt;!&ndash;            Name<b><span sec:authentication="principal.fullName">Fullname</span></b>&ndash;&gt;
+         <i><span sec:authentication="principal.authorities">Roles</span></i>
+     </div>-->
+
+
+<div th:replace="footer.html::footer"></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/productlist.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div th:replace="header.html::header"></div>
+<div th:replace="menu.html::menu"></div>
+
+
+<div class="alert alert-success" th:if="${successMessage != null}">
+    <p th:text="${successMessage}"></p>
+</div>
+<div class="alert alert-danger" th:if="${errorMessage != null}">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+
+<h1>My Cart</h1>
+
+
+<div class="product-preview-container" th:each="cartItemDto : ${cartdto.getCartItems()}">
+    <form method="POST" th:object="${addToCartDto}"
+          th:action="@{/cart/update/{cartItemId}(cartItemId=${cartItemDto.getId()})}" novalidate>
+
+        <input type="hidden" name="id" th:value="${cartItemDto.getId()}">
+        <input type="hidden" name="productCode" th:value="${cartItemDto.getProduct().getProductCode()}">
+        <ul>
+            <li><img class="product-image" th:src="@{${cartItemDto.getProduct().getImagePath()}}"/></li>
+            <li>Code: <span th:utext="${cartItemDto.getProduct().getProductCode()}"></span></li>
+            <li>Name: <span th:utext="${cartItemDto.getProduct().getName()}"></span></li>
+            <li>Price:<span class="price"
+                            th:utext="${#numbers.formatCurrency(cartItemDto.getProduct().getPrice())}"></span></li>
+            <li>Quantity: <input type="number" class="form-control"
+                                 th:classappend="${#fields.hasErrors('quantity')}?is-invalid" name="quantity"
+                                 th:value="${cartItemDto.getQuantity()}" min="1"></li>
+            <li>Sub Total: <span th:utext="${#numbers.formatCurrency(cartItemDto.getTotalCost())}"></span></li>
+        </ul>
+
+        <input class="button-update-sc" type="submit" value="Update"/>
+        <a th:href="@{/cart/delete/{cartItemId}(cartItemId=${cartItemDto.getId()})}">Delete</a>
+    </form>
+</div>
+
+<div>
+    <p>Sub Total: <span th:utext="${#numbers.formatCurrency(cartdto.getTotalCost())}"></span></p>
+    <a th:unless="${#lists.isEmpty(cartdto.getCartItems())}" th:href="@{/checkout}">Proceed To checkout</a>
+</div>
+<div th:replace="footer.html::footer"></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/productlist.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div th:replace="header.html::header"></div>
+<div th:replace="menu.html::menu"></div>
+
+<div class="alert alert-success" th:if="${successMessage != null}">
+    <p th:text="${successMessage}"></p>
+</div>
+<div class="alert alert-danger" th:if="${errorMessage != null}">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<h1>Product Details</h1>
+
+
+<form method="POST" th:object="${product}"
+      th:action="@{/cart/add/{productcode}(productcode=${product.getProductCode()})}" novalidate>
+
+    <div class="product-preview-container" th:object="${addToCartDto}">
+        <input type="hidden" name="productCode" th:value="${product.getProductCode()}">
+        <ul>
+            <li><img class="product-image" th:src="@{${product.getImagePath()}}"/></li>
+            <li>Code: <span th:utext="${product.getProductCode()}"></span></li>
+            <li>Name: <span th:utext="${product.getName()}"></span></li>
+            <li>Price:<span class="price" th:utext="${#numbers.formatCurrency(product.getPrice())}"></span></li>
+            <li>Description:<span class="description" th:utext="${product.getDescription()}"></span></li>
+            <li>Quantity:<input type="number" class="form-control"
+                                th:classappend="${#fields.hasErrors('quantity')}?is-invalid" name="quantity" value="1"
+                                min="1">
+            </li>
+        </ul>
+    </div>
+
+    <div style="clear: both"></div>
+    <input class="button-update-sc" type="submit" value="Add to Cart"/>
+
+</form>
+
+<div th:replace="footer.html::footer"></div>
+</body>
+</html>
