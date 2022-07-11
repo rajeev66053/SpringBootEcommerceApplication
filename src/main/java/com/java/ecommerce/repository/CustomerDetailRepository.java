@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerDetailRepository extends JpaRepository<CustomerDetail, Long> {
-
+    
+    //Indexed Query
     @Query("FROM CustomerDetail as cd where cd.user.id=?1")
     public CustomerDetail findCustomerDetailByUserId(Long Id);
 }
